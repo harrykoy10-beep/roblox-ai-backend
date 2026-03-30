@@ -26,8 +26,14 @@ app.post("/ask", async (req, res) => {
 
         res.json(response.data);
     } catch (err) {
+        console.error("Error:", err.message);
         res.status(500).send("Error");
     }
 });
 
 app.listen(3000, () => console.log("Running"));
+
+process.on("uncaughtException", (err) => {
+    console.error("Uncaught Exception:", err);
+    process.exit(1);
+});
